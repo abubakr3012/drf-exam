@@ -1,0 +1,212 @@
+
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; }
+.apps-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+}
+.app-block {
+  border: 1px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+.app-header {
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border-tertiary);
+  background: var(--color-background-secondary);
+}
+.app-header span {
+  font-size: 11px;
+  font-weight: 400;
+  margin-left: 8px;
+  opacity: 0.6;
+}
+.models-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 16px;
+}
+.model-card {
+  border-radius: 8px;
+  border: 1px solid var(--color-border-tertiary);
+  min-width: 160px;
+  flex: 1;
+}
+.model-name {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-border-tertiary);
+  color: var(--color-text-primary);
+}
+.field {
+  font-size: 12px;
+  padding: 3px 12px;
+  color: var(--color-text-secondary);
+  display: flex;
+  gap: 6px;
+}
+.field:last-child { padding-bottom: 8px; }
+.ftype {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+}
+.fk { color: var(--color-text-warning); font-size: 11px; }
+.pk { color: var(--color-text-info); font-size: 11px; }
+
+.h-customers .model-name { background: #E1F5EE; color: #085041; }
+.h-wallets    .model-name { background: #E6F1FB; color: #0C447C; }
+.h-trans      .model-name { background: #EEEDFE; color: #3C3489; }
+.h-payments   .model-name { background: #FAEEDA; color: #633806; }
+.h-notif      .model-name { background: #FAECE7; color: #712B13; }
+
+@media (prefers-color-scheme: dark) {
+  .h-customers .model-name { background: #085041; color: #9FE1CB; }
+  .h-wallets    .model-name { background: #0C447C; color: #B5D4F4; }
+  .h-trans      .model-name { background: #3C3489; color: #CECBF6; }
+  .h-payments   .model-name { background: #633806; color: #FAC775; }
+  .h-notif      .model-name { background: #712B13; color: #F5C4B3; }
+}
+</style>
+
+<div class="apps-grid">
+
+  <div class="app-block">
+    <div class="app-header">📁 customers <span>app</span></div>
+    <div class="models-row">
+      <div class="model-card h-customers">
+        <div class="model-name">CustomerProfile</div>
+        <div class="field"><span class="pk">PK</span> id</div>
+        <div class="field"><span class="fk">FK</span> user</div>
+        <div class="field"><span class="ftype">str</span> phone_number</div>
+        <div class="field"><span class="ftype">date</span> birth_date</div>
+        <div class="field"><span class="ftype">str</span> address</div>
+        <div class="field"><span class="ftype">str</span> passport_number</div>
+        <div class="field"><span class="ftype">dt</span> created_at</div>
+        <div class="field"><span class="ftype">dt</span> updated_at</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-block">
+    <div class="app-header">📁 wallets <span>app</span></div>
+    <div class="models-row">
+      <div class="model-card h-wallets">
+        <div class="model-name">Wallet</div>
+        <div class="field"><span class="pk">PK</span> id</div>
+        <div class="field"><span class="fk">FK</span> user</div>
+        <div class="field"><span class="ftype">str</span> wallet_number</div>
+        <div class="field"><span class="ftype">dec</span> balance</div>
+        <div class="field"><span class="ftype">str</span> currency</div>
+        <div class="field"><span class="ftype">str</span> status</div>
+        <div class="field"><span class="ftype">dt</span> created_at</div>
+        <div class="field"><span class="ftype">dt</span> updated_at</div>
+      </div>
+      <div class="model-card h-wallets">
+        <div class="model-name">BankCard</div>
+        <div class="field"><span class="pk">PK</span> id</div>
+        <div class="field"><span class="fk">FK</span> user</div>
+        <div class="field"><span class="ftype">str</span> card_holder</div>
+        <div class="field"><span class="ftype">str</span> masked_pan</div>
+        <div class="field"><span class="ftype">str</span> card_type</div>
+        <div class="field"><span class="ftype">int</span> expire_month</div>
+        <div class="field"><span class="ftype">int</span> expire_year</div>
+        <div class="field"><span class="ftype">str</span> status</div>
+        <div class="field"><span class="ftype">dt</span> created_at</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-block">
+    <div class="app-header">📁 transactions <span>app</span></div>
+    <div class="models-row">
+      <div class="model-card h-trans">
+        <div class="model-name">Transaction</div>
+        <div class="field"><span class="pk">PK</span> id</div>
+        <div class="field"><span class="fk">FK</span> sender_wallet</div>
+        <div class="field"><span class="fk">FK</span> receiver_wallet</div>
+        <div class="field"><span class="ftype">str</span> transaction_type</div>
+        <div class="field"><span class="ftype">dec</span> amount</div>
+        <div class="field"><span class="ftype">dec</span> commission</div>
+        <div class="field"><span class="ftype">dec</span> total_amount</div>
+        <div class="field"><span class="ftype">str</span> currency</div>
+        <div class="field"><span class="ftype">str</span> status</div>
+        <div class="field"><span class="ftype">str</span> description</div>
+        <div class="field"><span class="ftype">dt</span> created_at</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-block">
+    <div class="app-header">📁 payments <span>app</span></div>
+    <div class="models-row">
+      <div class="model-card h-payments">
+        <div class="model-name">PaymentCategory</div>
+        <div class="field"><span class="pk">PK</span> id</div>
+        <div class="field"><span class="ftype">str</span> name</div>
+        <div class="field"><span class="ftype">str</span> description</div>
+        <div class="field"><span class="ftype">bool</span> is_active</div>
+        <div class="field"><span class="ftype">dt</span> created_at</div>
+      </div>
+      <div class="model-card h-payments">
+        <div class="model-name">ServiceProvider</div>
+        <div class="field"><span class="pk">PK</span> id</div>
+        <div class="field"><span class="fk">FK</span> category</div>
+        <div class="field"><span class="ftype">str</span> name</div>
+        <div class="field"><span class="ftype">str</span> account_mask</div>
+        <div class="field"><span class="ftype">dec</span> min_amount</div>
+        <div class="field"><span class="ftype">dec</span> max_amount</div>
+        <div class="field"><span class="ftype">dec</span> commission_percent</div>
+        <div class="field"><span class="ftype">bool</span> is_active</div>
+        <div class="field"><span class="ftype">dt</span> created_at</div>
+      </div>
+      <div class="model-card h-payments">
+        <div class="model-name">Payment</div>
+        <div class="field"><span class="pk">PK</span> id</div>
+        <div class="field"><span class="fk">FK</span> user</div>
+        <div class="field"><span class="fk">FK</span> wallet</div>
+        <div class="field"><span class="fk">FK</span> provider</div>
+        <div class="field"><span class="fk">FK</span> transaction</div>
+        <div class="field"><span class="ftype">str</span> account_number</div>
+        <div class="field"><span class="ftype">dec</span> amount</div>
+        <div class="field"><span class="ftype">dec</span> commission</div>
+        <div class="field"><span class="ftype">dec</span> total_amount</div>
+        <div class="field"><span class="ftype">str</span> status</div>
+        <div class="field"><span class="ftype">dt</span> created_at</div>
+      </div>
+      <div class="model-card h-payments">
+        <div class="model-name">FavoritePayment</div>
+        <div class="field"><span class="pk">PK</span> id</div>
+        <div class="field"><span class="fk">FK</span> user</div>
+        <div class="field"><span class="fk">FK</span> provider</div>
+        <div class="field"><span class="ftype">str</span> title</div>
+        <div class="field"><span class="ftype">str</span> account_number</div>
+        <div class="field"><span class="ftype">dt</span> created_at</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-block">
+    <div class="app-header">📁 notifications <span>app</span></div>
+    <div class="models-row">
+      <div class="model-card h-notif">
+        <div class="model-name">Notification</div>
+        <div class="field"><span class="pk">PK</span> id</div>
+        <div class="field"><span class="fk">FK</span> user</div>
+        <div class="field"><span class="ftype">str</span> title</div>
+        <div class="field"><span class="ftype">str</span> message</div>
+        <div class="field"><span class="ftype">str</span> notification_type</div>
+        <div class="field"><span class="ftype">bool</span> is_read</div>
+        <div class="field"><span class="ftype">dt</span> created_at</div>
+      </div>
+    </div>
+  </div>
+
+</div>
